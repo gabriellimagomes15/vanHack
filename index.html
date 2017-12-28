@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jobs Vacancies Analysis</title>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script src="js/d3.js"></script>  
+	<script type="text/javascript" src="js/functions.js"></script> 
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.js"></script>
+	<script src="  https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.min.css">
+ 
+		
+	<style> /* set the CSS */
+
+	</style>
+</head>
+<body class="">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>                        
+		  </button>	
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav">
+			<li class="" ><a href="index.html">Home</a></li>
+			<!--li><a href="#" data-toggle="tooltip" data-placement="bottom" title="About me!" >About</a></li>
+			<li><a href="#">Projects</a></li-->
+			<li><a href="#contact" data-toggle="tab">Contact</a></li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="https://github.com/gabriellimagomes15"  target="_blank"
+				 class="header-logo-invertocat my-0" style="padding: 5px 10px" data-toggle="tooltip" 
+				 data-placement="bottom" title="GitHub!" >
+				<svg aria-hidden="true" class="octicon octicon-mark-github" style="fill: #fff;"
+					height="30" version="1.1" viewBox="0 0 16 16" width="32">
+					<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+				</svg>
+			</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+	<br><br><br>
+	<div class="">
+		<div class="text-center">
+			<div class="row content">
+				<div class="col-sm-2 sidenav">
+				  <h2>Analysis</h2>
+					<ul id="nav-tabs-wrapper" class="nav nav-pills nav-stacked">
+					  <li class=""><a href="#vtab1" data-toggle="tab">Jobs Vacancies</a></li>
+					  <li><a href="#vtab2" data-toggle="tab">Companies Rating</a></li>
+					  <!--li><a href="#vtab3" data-toggle="tab">Tab 3</a></li-->
+					</ul>
+				</div>
+				<div class="col-sm-10 text-left"> 
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane fade in active" id="home">
+							
+								<div class="jumbotron col-sm-10">
+									<h1>
+										Jobs Vacancies Analysis
+									</h1>
+									<p>This is a web app to analysis jobs vacancies data, with dashboards about 
+										vacancies, salaries among others.</p>
+									<p>Also there is some analysis about Companies Rating, analyzing rate and 
+										comments of employee or ex-employee about some companies.</p>
+								</div>
+														
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="vtab1">
+							<h3> Jobs Vacancies Analysis</h3>
+							<p> This module show you about vacancies jobs, average salary and skills
+								requirement by country.
+							</p>
+							<div class="row">
+								<div class="searchable"> 
+								  <select id="comboInst" multiple='multiple'>        
+								  </select>
+								</div>
+								<div id="infos" class="col-sm-5"> 
+									<h2> Infos: </h2>
+								</div>
+							</div>
+							<div id="charts" class="container row" style="margin-top: 20px;margin-left: 2px;">
+								<!--div id="row-1" class="row"></div>
+								<div id="row-2" class="row"></div-->
+								<div id="jobs" class="row"></div>
+								<div id="meansal" class="row"></div>
+								<div id="skills" class="row"></div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="vtab2">
+							<h3>Companies Rating</h3>
+							<p> This module show you about available rating companies. 
+								Here is rating recommendations of companies available .
+							</p>
+							<div id='vis'>
+								<div class='container row'></div>
+								<div id='poscoment' class='container row'></div>
+								<div id='negcoment' class='container row'></div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane fade in" id="contact">
+							<div class="jumbotron col-sm-10">
+								<h1>Contact me</h1>      
+								<h3>Email</h3> <h4>gabriel.lg08@gmail.com</h4>
+								<h3>Phone</h3> <h4>+55 61 985094857</h4>
+								
+								<h4><a href="https://github.com/gabriellimagomes15">
+										<img style="width:15%;margin-left: -1em;" 
+										src="https://www.monolitonimbus.com.br/wp-content/uploads/2017/12/github.png"/>
+									</a>
+								</h4>
+								<h4><a href="https://www.linkedin.com/in/gabriellimagomes/">
+									<img style="width:5%" 
+										src="https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAANyAAAAJGRlZTNlZDQwLTk4YTItNDA1MS04MzBjLWJmNGQ5M2RmZGUxYw.png"/>
+									</a>
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	//
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	});
+	
+	var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+	
+	var color = ["#ca0020","#0f05e3;","#0db000","#0571b0","#f4a582"];
+	var limitSelec = 3;
+
+
+
+
+function barCharts(countrySelect){
+	d3.json('data/data.json',function(error, data){
+		if(error) throw error;
+		data.forEach(function(d) {
+			d.salary = +d.salary;
+		});
+		data = data.filter(function(d) { return countrySelect.includes(d.country) })
+		
+		var groupSkill = []
+		var dataNest = d3.nest()
+			.key(function(d) {return d.country;})
+			.entries(data);
+			
+		dataNest.map(function(x){
+			x.values.map(function(d){
+				var skill = d.skillclean.split(',');
+				skill.forEach(function(row){
+					//console.log(row)
+					groupSkill.push({key:x.key, skill: row.trim()})
+				})
+			})
+		})
+		
+		var groupS = groupBy(groupSkill, ['key','skill'])
+		
+		groupS.map(function(x){
+			x.values = x.values.filter(function(filtro){ return filtro.value != ""})
+			
+			var countSkill = x.values.map(function(row){
+				//console.log(row)
+				//return {value: row.value}
+				//row = row.filter(function(filtro) { return filtro.value != ""});
+				return {value: row.value,count: row.count.count}
+			})
+			countSkill.sort(function(x,y){
+				return y.count - x.count
+			})
+			countSkill = countSkill.slice(0,10)
+			countSkill.sort(function(x,y){
+				return x.count - y.count
+			})
+			barGraph('#skills','Top skills ' + x.value, countSkill, true)
+		})
+		
+		/************* GROUPBY BY COUNTRY **************/
+		var group = groupBy(data,['country']);
+		// BAR CHART OF COUNT OF THE QUANTITY OF JOBS VACANCIES BY COUNTRY
+		countJobs = group.map(function(x){
+			return {value: x.value, count: x.count.count}
+		})
+		countJobs.sort(function(x, y){        
+			return y.count - x.count;
+		})			
+		countJobs = countJobs.slice(0,10);
+		barGraph('#jobs','Jobs Vacancies by Country',countJobs,false);
+		
+		// BAR CHART OF AVARAGE OF THE SALARY BY COUNTRY
+		meanSal = group.map(function(x){
+			return {value: x.value, count: x.count.meanSal}
+		})
+		meanSal.sort(function(x, y){        
+			return y.count - x.count;
+		})
+		
+		barGraph('#jobs','Average Salary by Country',meanSal,false);
+		
+		// INSERTING INFOS IN TEXT
+		group.forEach(function(i,e){
+			var text = i.value + ', min Salary = $' + i.count.minSal.toLocaleString('de-DE') + 
+						', max salary = $' + i.count.maxSal.toLocaleString('de-DE') + ' by year'; 
+			var info = d3.selectAll('#infos')
+						.append("div")
+						.text(text)
+						.style('color',color[e])
+						.style('margin','2px')
+						.style('font-size', '18px');
+			
+		})
+	});
+}
+
+d3.json('data/data.json',function(error, data){
+	montaCombo(data,'country','#comboInst');
+});
+
+function compRating(countrySelect){
+	//var parseTime = dateParse("%d %b %Y");
+	var parseTime = dateParse("%Y-%m-%d")
+	d3.json('data/review.json',function(error, data){
+		if(error) throw error;
+		//data = data.filter(function(d) { return countrySelect.includes(d.company) })
+		data.forEach(function(d) {
+			d.rating = +d.rating;
+			d.dateFull = parseTime(d.dateFull)
+		});
+		
+		countAvalible = groupBy(data,['company'])
+		smallChart('#vis > .row', countAvalible);
+		
+		var countRecommends = groupBy(data,['company','recomends'])
+			
+		countRecommends.map(function(x){
+			x.values = x.values.filter(function(filtro){ return filtro.value != ""})
+			
+			var countRec = x.values.map(function(row){
+				return {value: row.value,count: row.count.count}
+			})
+			countRec.sort(function(x,y){
+				return y.count - x.count
+			})
+			countRec.sort(function(x,y){
+				return x.count - y.count
+			})
+			barGraph('#vis','Recommendation for ' +  x.value,countRec,false);
+		})
+		
+		var negComments = []
+		var posComments = []
+		var dataNest = d3.nest()
+						.key(function(d) {return d.company;})
+						.entries(data);
+			
+		dataNest.map(function(x){
+			x.values.map(function(d){
+				var prosComments = d.prosClean.split(' ');
+				
+				prosComments.forEach(function(row){
+					posComments.push({key:x.key, comments: row.trim()})
+				})
+				var consComments = d.consClean.split(' ');
+				consComments.forEach(function(row){
+					negComments.push({key:x.key, comments: row.trim()})
+				})
+			})
+		})
+		
+		
+		var groupS = groupBy(posComments, ['key','comments']);
+		
+		groupS.map(function(x){
+			x.values = x.values.filter(function(filtro){ return filtro.value != ""})
+			
+			var countWord = x.values.map(function(row){
+				return {value: row.value,count: row.count.count}
+			})
+			countWord.sort(function(x,y){
+				return y.count - x.count
+			})
+			countWord = countWord.slice(0,10)
+			countWord.sort(function(x,y){
+				return x.count - y.count
+			})
+			
+			barGraph('#poscoment','Pos comments ' + x.value, countWord, true)
+		})
+		
+		var groupS = groupBy(negComments, ['key','comments'])
+		groupS.map(function(x){
+			x.values = x.values.filter(function(filtro){ return filtro.value != ""})
+			
+			var countWord = x.values.map(function(row){
+				return {value: row.value,count: row.count.count}
+			})
+			countWord.sort(function(x,y){
+				return y.count - x.count
+			})
+			countWord = countWord.slice(0,10)
+			countWord.sort(function(x,y){
+				return x.count - y.count
+			})
+			barGraph('#negcoment','Neg comments ' + x.value, countWord, true)
+		})
+		
+	});
+}
+compRating();
+
+line('#row-1','Posts of jobs vacancies', '');
+
+</script>
+
+</body>
+</html>

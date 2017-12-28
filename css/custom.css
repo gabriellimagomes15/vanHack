@@ -1,0 +1,86 @@
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+.col-sm-6 {
+	width: 33% !important;
+}
+
+#infos {
+	width: 60% !important;
+	box-shadow: 5px 5px 5px #ccc;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#skills > div > h2:nth-child(1){
+	color: steelblue !important;
+}	
+
+.meanRate{
+	fill: yellow !important;
+}
+
+.minRate{
+	fill: red !important;
+}
+
+.maxRate{
+	fill: green !important;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  //display: none;
+}
+
+.toolTip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffffff;
+  border: 0 none;
+  border-radius: 8px 8px 8px 8px;
+  box-shadow: -3px 3px 15px #888888;
+  text-align: center;
+}
+
+.borderDiv{
+  border: solid 1px #ccc;
+  box-shadow: 1px 1px 1px #ccc;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
