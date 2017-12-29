@@ -278,7 +278,7 @@ function montaSearchble(){
 		
 		if(qtdSelec.length == limitSelec){
 			$('.ms-selectable').find("*").prop('disabled', true);
-			alert('Limite de insituiçãoes é de ' + limitSelec )
+			alert('The limit of select is ' + limitSelec )
 		}
 		var countrySelec = []
 		for( var i =0; i <  qtdSelec.length; i++){
