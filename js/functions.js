@@ -1,7 +1,8 @@
-
+//function to parse date
 function dateParse(format){
 	return d3.timeParse(format)
 }
+
 // set the dimensions and margins of the graph
 function line (id,titleDiv,d){
 	var margin = {top: 20, right: 20, bottom: 105, left: 50},
@@ -76,17 +77,13 @@ function line (id,titleDiv,d){
 	});
 }
 
-function barGraph(id,titleDiv,data,horizontal){
-	
+//FUNCTINO TO MAKE BAR CHART
+function barGraph(id,titleDiv,data,horizontal){	
 	var div = d3.selectAll(id)
 			  .append("div")
 			  .attr("class", "col-sm-6 borderDiv")
 			  .style("height", "300px");
-
-	var margin = {top: 20, right: 20, bottom: 105, left: 50},
-		width  = 550 - margin.left - margin.right,
-		height = 300 - margin.top - margin.bottom;
-	
+			  
 	var margin = {top: 20, right: 20, bottom: 105, left: 50},
 		width  = 350 - margin.left - margin.right,
 		height = 250 - margin.top - margin.bottom;
@@ -107,7 +104,7 @@ function barGraph(id,titleDiv,data,horizontal){
 	var title = div.append("h2")
 				  .text(titleDiv);
 	
-	// IF PARA MONTAR O GRÁFICO HORIZONTAL OU VERTICAL 	
+	// IF TO MAKE HORIZONTAL OR VERTICAL BAR CHART 	
 	if(horizontal){
 		var margin = {top: 20, right: 20, bottom: 105, left: 70};
 		var x = d3.scaleLinear().range([0, width]);
@@ -118,19 +115,15 @@ function barGraph(id,titleDiv,data,horizontal){
 	}else{
 		var x = d3.scaleBand().range([0, width]).padding(.5),	
 			y = d3.scaleLinear().rangeRound([height, 0]);
-			
+		
 		x.domain(data.map(function(d) { return d.value; }));
-		y.domain([0, d3.max(data, function(d) { return d.count; })]);
-	
+		y.domain([0, d3.max(data, function(d) { return d.count; })]);	
 	}
-	
 	var svg = div.append("svg")
 			 .attr("width", "100%")
 			 .attr("height", "100%")
-			
 	var g = svg.append("g")
 		.attr("transform", "translate(" + margin.left  + "," + margin.top + ")");
-
 	g.append("g")
 	  .attr("class", "axis axis--x")
 	  .attr("transform", "translate(0," + height + ")")
@@ -154,31 +147,24 @@ function barGraph(id,titleDiv,data,horizontal){
 	  .attr("dy", "0.71em")
 	  .attr("text-anchor", "end")
 	  
-
 	var bar = g.selectAll(".bar")
 			.data(data)
 			.enter().append("rect")
 			  .attr("class", "bar")
-			  
-		  
 	  
 	if(horizontal) { 
 		bar = bar
 			.attr("x", 0 )
 			.attr("y", function(d){ return y(d.value); })
 			.attr("height", y.bandwidth())
-			.attr("width", function(d) { return x(d.count); })
-		
+			.attr("width", function(d) { return x(d.count); })	
 	}else{
 	  bar = bar
 		  .attr("x", function(d) { return x(d.value); })
 		  .attr("y", function(d) { return y(d.count); })
 		  .attr("height", function(d) { return height - y(d.count); })	
 		  .attr("width", x.bandwidth() )
-		  //.style("fill", function(d) {return color(d.value)});
 	}
-	
-	
 	bar.on("mousemove", function(d){
 		tooltip
 		  .style("left", d3.event.pageX - 50 + "px")
@@ -188,14 +174,15 @@ function barGraph(id,titleDiv,data,horizontal){
 	})
     .on("mouseout", function(d){ tooltip.style("display", "none");});	
 }
-// FUNÇÃO PARA RETORNAR UMA FUNÇÃO COM PROPERTYNAME.
-// UTILIZADA PARA CRIAR O GROUPBY DINAMICAMENTE
+// FUNCTION TO RETURN FUNCTION NEST.
+// IT IS USED CREATE A DYNAMICALY GROUPBY
 function createNestingFunction(propertyName){
 	return function(d){ 
     	return d[propertyName];
     };
 }
 
+//FUNCTION TO MAKE GROUPBY
 function groupBy(dados,levels){
 	// CRIANDO OBJETO DO TIPO 'nest()'
 	var nest = d3.nest();
@@ -214,26 +201,13 @@ function groupBy(dados,levels){
 			minRate: d3.min(v, function(d) { return d.rating; }),
 			maxRate: d3.max(v, function(d) { return d.rating; }),
 			meanRate: d3.mean(v, function(d) { return d.rating; })
-		
-		}; }).entries(dados);
-
-	
+		}; 
+	}).entries(dados);
 	groupBy = JSON.parse(JSON.stringify(groupBy).split('"value":').join('"count":'));//ALTERAR NOME DOS ATRIBUTOS DO JSON
 	groupBy = JSON.parse(JSON.stringify(groupBy).split('"key":').join('"value":')); //ALTERAR NOME DOS ATRIBUTOS DO JSON
 
-    return groupBy;
+	return groupBy;
 }
-
-function readCSV(file){
-	var retorno = [];	
-	d3.csv(file,function(error, data){
-		data.map(function(x){
-			retorno.push({data})
-		});
-	});
-	return retorno;
-}
-
 
 
 /**********************************************************************
@@ -270,7 +244,6 @@ function montaSearchble(){
     afterSelect: function(){
 		this.qs1.cache();
 		this.qs2.cache();
-
 		var qtdSelec = $('.ms-selection').find('.ms-list > .ms-elem-selection.ms-selected');
 
 		d3.selectAll("#charts > div > .col-sm-6").remove();
@@ -314,7 +287,7 @@ function montaSearchble(){
   });
 }
 
-// MONTA COMBO DAS INSITITUIÇÕES DA BASE
+// FUNCTION TO MAKE COMB
 function montaCombo (dados,field, id){
 	var dados = d3.nest()
 					.key(function(d) {return d[field];})
@@ -335,6 +308,7 @@ function montaCombo (dados,field, id){
 	$('.ms-container').addClass('col-sm-6');
 }
 
+//FUNCTINO TO MAKE SMALL CHARTS OF RATING COMPANIES
 function smallChart(id, data){
 	var margin = {top: 45, right: 100, bottom: 20, left: 20},
 		width = 450 - margin.left - margin.right,
